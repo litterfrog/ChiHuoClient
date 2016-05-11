@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cardlist_bottom_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/ivUser"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/portrait" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvScreen_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户昵称"
+                    android:textColor="#FE7016"
+                    android:textSize="13sp"
+                    android:typeface="monospace" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/common_icon_membership_level1"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom" >
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="address"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+		<LinearLayout
+		        android:layout_width="wrap_content"
+           		android:layout_height="wrap_content"
+            	android:layout_gravity="center"
+            	android:layout_marginLeft="10dp"
+            	android:layout_marginRight="10dp"
+            	android:orientation="vertical" >
+            
+		      <TextView
+            		android:id="@+id/tvComment"
+            		android:layout_width="wrap_content"
+           			android:layout_height="wrap_content"
+            		android:layout_gravity="center"
+            		android:textColor="#FE7016"
+            		android:text="写评论"
+            		android:textSize="11sp"
+            		android:clickable="true" />
+		</LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="简介"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:id="@+id/llNine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/llChild1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ivFirstOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/ivSecondOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/ivThirdOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llChild2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ivFourthOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading" 
+                android:clickable="true"/>
+
+            <ImageView
+                android:id="@+id/ivFifthOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/ivSixthOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llChild3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ivSeventhOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/ivEighthOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/ivNinthOfNine"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/timeline_image_loading"
+                android:clickable="true" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ImageView09"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/divider_horizontal_timeline" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.fxp.myview.MyImageButton
+            android:id="@+id/mIBtn_respot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:src="@drawable/timeline_icon_redirect"
+            android:text="吃过"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp" >
+        </com.fxp.myview.MyImageButton>
+
+        <ImageView
+            android:id="@+id/ImageView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/mini_vertical_line" />
+
+        <com.fxp.myview.MyImageButton
+            android:id="@+id/mIBtn_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:src="@drawable/timeline_icon_comment"
+            android:text="评论"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp" >
+        </com.fxp.myview.MyImageButton>
+
+        <ImageView
+            android:id="@+id/ImageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/mini_vertical_line" />
+
+        <com.fxp.myview.MyImageButton
+            android:id="@+id/myImageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:src="@drawable/like_selector"
+            android:text="赞"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp" >
+        </com.fxp.myview.MyImageButton>
+    </LinearLayout>
+
+</LinearLayout>

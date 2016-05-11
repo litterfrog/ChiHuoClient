@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cardlist_bottom_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/ivCommHead"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/portrait" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvComment_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FE7016"
+                android:text="name"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom" >
+
+                <TextView
+                    android:id="@+id/tvCommCreated_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="微博创建时间"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/textView3Comm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="@string/from"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvCommSource"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="微博来源"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:visibility="gone" />
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/ImageView09Comm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/divider_horizontal_timeline" />
+    <TextView
+        android:id="@+id/tvComment_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="评论内容"
+        android:textColor="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/ivComment"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:visibility="gone"/>
+
+</LinearLayout>

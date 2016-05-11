@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/navigationbar_background"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnUploadCancel"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:onClick="onClick"
+            android:text="取消" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="评论" />
+
+        <Button
+            android:id="@+id/btnUploadWeiBo"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/comment_btn_selector"
+            android:enabled="false"
+            android:onClick="onClick"
+            android:text="发送"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ImageView09"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/divider_horizontal_timeline" />
+
+    <EditText
+        android:id="@+id/etUpload"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:gravity="top" >
+
+        <requestFocus />
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <FrameLayout
+            android:id="@+id/flUploadPic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/ivUploadPic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/common_button_big_orange" />
+
+            <ImageButton
+                android:id="@+id/ibtnDeleteBitmap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/editgroup_item_delete"
+                android:background="@null"
+                android:layout_gravity="bottom|right"
+                android:onClick="onClick" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ImageView19"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/divider_horizontal_timeline" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/ibtnGetBitmap"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/compose_toolbar_picture_selector" 
+            android:onClick="onClick"/>
+        <ImageButton
+            android:id="@+id/ibtnCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/compose_toolbar_camera_selector"
+            android:onClick="onClick" />
+        <ImageButton
+            android:id="@+id/ibtnEmoticon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/compose_emoticonbutton_selector" />
+        <ImageButton
+            android:id="@+id/ibtnMention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/compose_mentionbutton_selector" />
+
+        <ImageButton
+            android:id="@+id/ibtnTrend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/compose_trendbutton_selector" />
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
