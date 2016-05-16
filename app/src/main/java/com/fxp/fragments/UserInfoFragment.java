@@ -276,6 +276,11 @@ public class UserInfoFragment extends Fragment {
 					showRegisterFace();
 				}else if("设置"==tv_switch_register.getText().toString().trim()){
 					//启动设置activity
+					Intent intent=new Intent(getActivity(),UserInfoModifyActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("user", user);
+					intent.putExtras(bundle);
+					startActivity(intent);
 				}else if("登录"==tv_switch_register.getText().toString().trim()){
 					showLoginFace();
 				}

@@ -3,7 +3,9 @@ package com.fxp.manager;
 import java.util.ArrayList;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
 
 import com.fxp.constants.ProviderConstant;
@@ -23,7 +25,20 @@ public class UserInfoManager {
   };
 	public UserInfoManager(ContentResolver contentResolver){
 		this.contentResolver=contentResolver;
-	};	
+	};
+	public Boolean setUsrInfo(User user){
+		ContentValues content=new ContentValues();
+		content.put(ProviderConstant.TUSERINFO_ACCID, user.getAccId());
+		content.put(ProviderConstant.TUSERINFO_NAME, user.getName());
+		content.put(ProviderConstant.TUSERINFO_SEX, user.getSex());
+		content.put(ProviderConstant.TUSERINFO_PHONE, user.getPhone());
+		content.put(ProviderConstant.TUSERINFO_ADDRESS, user.getAddress());
+		Uri insert = contentResolver.insert(ProviderConstant.USER_URI, content);
+		if(Integer.valueOf(insert.getPathSegments().get(1))>0){
+			return true;
+		}
+		return false;
+	}
 	public ArrayList<User> getUserListAll(){
 		Cursor cursor = contentResolver.query(
 		          ProviderConstant.USER_URI, 
