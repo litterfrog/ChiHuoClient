@@ -55,7 +55,8 @@ public class PictureUtil {
 		}
 
 	}
-	public static ArrayList<Bitmap> getCommonPictureList(String picPath){
+	public static ArrayList<Bitmap> getCommonPictureList(int foodId){
+		String picPath=Constant.BASE_PATH+foodId;
 		File absolutePath=getAbsolutPath(picPath);
 		ArrayList<Bitmap> commonPicList=new ArrayList<Bitmap>();
 		if(null==absolutePath){
@@ -74,7 +75,8 @@ public class PictureUtil {
 		}
 		return commonPicList;
 	}
-	public static ArrayList<String> getCommonPicturePathList(String picPath){
+	public static ArrayList<String> getCommonPicturePathList(int foodId){
+		String picPath=Constant.BASE_PATH+foodId;
 		File absolutePath=getAbsolutPath(picPath);
 		ArrayList<String> commonPicPathList=new ArrayList<String>();
 		if(null==absolutePath){
@@ -94,7 +96,8 @@ public class PictureUtil {
 		return commonPicPathList;
 	}
 	
-	public static Bitmap getFoodHeadPicture(String picPath){
+	public static Bitmap getFoodHeadPicture(int foodId){
+		String picPath=Constant.BASE_PATH+foodId;
 		File absolutePath=getAbsolutPath(picPath);
 		if(null==absolutePath){
 			return BitmapFactory.decodeResource(m_context.getResources(), R.drawable.portrait);

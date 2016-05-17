@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.fxp.activities.CommentActivity;
 import com.fxp.activities.LargeImageActivity;
 import com.fxp.activities.UploadCommentActivity;
+import com.fxp.constants.Constant;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.Food;
 import com.fxp.manager.FoodManager;
@@ -97,7 +98,7 @@ public class HomeFragment extends Fragment {
 	private void setPicListWithFoodList(){
 		picList.clear();
 		for(Food f:foodList){
-			picList.add(PictureUtil.getCommonPicturePathList(f.getPictruepath()));
+			picList.add(PictureUtil.getCommonPicturePathList(f.getId()));
 			
 		}
 	}
@@ -204,7 +205,7 @@ public class HomeFragment extends Fragment {
 			holder.tvScreen_name
 					.setText(foodList.get(position).getName());
 			// 头像
-			holder.ivUser.setImageBitmap(PictureUtil.getFoodHeadPicture(foodList.get(position).getPictruepath()));
+			holder.ivUser.setImageBitmap(PictureUtil.getFoodHeadPicture(foodList.get(position).getId()));
 						
 			//address
 			holder.tvAddress.setText(foodList.get(position).getAddress());
