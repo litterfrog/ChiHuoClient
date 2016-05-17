@@ -26,6 +26,22 @@ public class UserInfoManager {
 	public UserInfoManager(ContentResolver contentResolver){
 		this.contentResolver=contentResolver;
 	};
+	public boolean updateUserInfo(User user){
+		ContentValues content=new ContentValues();
+		content.put(ProviderConstant.TUSERINFO_NAME, user.getName());
+		content.put(ProviderConstant.TUSERINFO_SEX, user.getSex());
+		content.put(ProviderConstant.TUSERINFO_PHONE, user.getPhone());
+		content.put(ProviderConstant.TUSERINFO_ADDRESS, user.getAddress());
+		int update = contentResolver.update(
+				ProviderConstant.USER_URI,
+				content,
+				ProviderConstant.TUSERINFO_ACCID + "=" + user.getAccId(),
+				null);
+		if(1==update){
+			return true;
+		}
+		return false;
+	}
 	public Boolean setUsrInfo(User user){
 		ContentValues content=new ContentValues();
 		content.put(ProviderConstant.TUSERINFO_ACCID, user.getAccId());

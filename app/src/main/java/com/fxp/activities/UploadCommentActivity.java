@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -27,8 +28,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fxp.constants.ProviderConstant;
+import com.fxp.entity.Comment;
 import com.fxp.manager.CommentManager;
 import com.fxp.util.BitMapUtil;
+import com.fxp.util.DialogUtil;
+import com.fxp.util.PictureUtil;
+import com.fxp.util.SharedPreferenceUtil;
+import com.fxp.util.TimeUtil;
 import com.moxun.tagcloud.R;
 
 public class UploadCommentActivity extends Activity {
@@ -62,11 +68,23 @@ public class UploadCommentActivity extends Activity {
 	public void onClick(View v){
 		switch (v.getId()) {
 		case R.id.btnUploadWeiBo:
+
+			int accId=SharedPreferenceUtil.getInstance(this).getAccId();
+			if(0==accId){
+				//提示请登录
+				DialogUtil.dialogWithOneButton(this,"请先登录");
+				break;
+			}
+			String currentTime=TimeUtil.getCurrentTime();
+			commentManager.setComment(foodId, accId, etUpload.getText().toString(), currentTime);
 			if(BitMapUtil.bitmap==null){
 				//不带图片
-//				commentManager.setComment(foodId, accId, etUpload.getText().toString(), time);
 			}else{
 				//带图片
+				ArrayList<Comment> commentFoodIdAccIdTime = commentManager.getCommentFoodIdAccIdTime(foodId, accId, currentTime);
+				if(null!=commentFoodIdAccIdTime&&1==commentFoodIdAccIdTime.size()){
+					PictureUtil.saveCommentPicture(BitMapUtil.bitmap,commentFoodIdAccIdTime.get(0).getId());
+				}
 			}
 
 			finish();

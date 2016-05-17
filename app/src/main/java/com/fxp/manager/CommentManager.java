@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.fxp.constants.ProviderConstant;
@@ -47,6 +48,20 @@ public class CommentManager {
 		content.put(ProviderConstant.TCOMMENT_COMMENT, comment);
 		content.put(ProviderConstant.TCOMMENT_TIME, time);
 		contentResolver.insert(ProviderConstant.COMMENT_URI, content);
+	}
+	public ArrayList<Comment> getCommentFoodIdAccIdTime(int foodId,int AccId,String time){
+		if(foodId<=0||AccId<=0|| TextUtils.isEmpty(time)){
+			return null;
+		}
+		Cursor cursor = contentResolver.query(
+				ProviderConstant.COMMENT_URI,
+				commentColums,
+				ProviderConstant.TCOMMENT_FOODID + "=" + foodId +
+						" AND " + ProviderConstant.TCOMMENT_ACCID+"="+AccId+
+						" AND "+ProviderConstant.TCOMMENT_TIME+"= ? ",
+				new String[]{time},
+				null);
+		return getCommentFromCursor(cursor);
 	}
 	public ArrayList<Comment> getCommentListAllByFoodId(int foodId){
 		if(foodId<0){
