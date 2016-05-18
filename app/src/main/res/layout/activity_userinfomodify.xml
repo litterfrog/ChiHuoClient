@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="@drawable/message_group_avatar_background" >
    <FrameLayout
         android:layout_width="match_parent"
@@ -17,6 +18,16 @@
             android:layout_marginTop="12dp"
             android:text="信息修改"
             android:textSize="15sp" />
+       <Button
+           android:id="@+id/btnCancelModifyUserInfo"
+           style="?android:attr/buttonStyleSmall"
+           android:layout_width="20dp"
+           android:layout_height="20dp"
+           android:layout_marginLeft="5dp"
+           android:onClick="onClick"
+           android:background="@drawable/detail_back_normal"
+           android:layout_gravity="center_vertical"
+           />
     </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"

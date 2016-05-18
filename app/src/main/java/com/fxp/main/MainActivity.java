@@ -2,35 +2,31 @@ package com.fxp.main;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
-import android.view.WindowManager;
 
+import com.fxp.base.BaseAppCompatActivity;
 import com.fxp.fragments.HomeFragment;
-import com.fxp.fragments.LoginFragment;
 import com.fxp.fragments.RecentsFragment;
 import com.fxp.fragments.SampleFragment;
 import com.fxp.fragments.UserInfoFragment;
-import com.fxp.login.LoginActivity;
 import com.moxun.tagcloud.R;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarFragment;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseAppCompatActivity {
     private BottomBar mBottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setFragmentItems(getFragmentManager(), R.id.fragmentContainer,
                 new BottomBarFragment(RecentsFragment.newInstance(), R.drawable.ic_recents, "随便看看"),
                 new BottomBarFragment(SampleFragment.newInstance("Content for favorites."), R.drawable.ic_favorites, "最爱"),
-                new BottomBarFragment(HomeFragment.newInstance(), R.drawable.ic_nearby, "附近"),
+                new BottomBarFragment(HomeFragment.newInstance(), R.drawable.ic_nearby, "美食"),
                 new BottomBarFragment(UserInfoFragment.newInstance(), R.drawable.ic_friends, "我的主页"),
                 new BottomBarFragment(SampleFragment.newInstance("Content for food."), R.drawable.ic_restaurants, "我吃过的")
         );

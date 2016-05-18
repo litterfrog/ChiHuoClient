@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:orientation="horizontal"
         android:background="@drawable/navigationbar_background" >
 
@@ -45,7 +46,10 @@
             android:visibility="invisible" />
 
     </LinearLayout>
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/divider_horizontal_timeline" />
     <EditText
         android:id="@+id/etSendComment"
         android:layout_width="match_parent"
@@ -59,8 +63,7 @@
     <ListView
         android:id="@+id/lvComment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/message_group_avatar_background" >
+        android:layout_height="wrap_content" >
     </ListView>
 
 </LinearLayout>

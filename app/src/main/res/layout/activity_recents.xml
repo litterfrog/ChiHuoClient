@@ -5,32 +5,33 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context="com.moxun.tagcloud.MainActivity">
-<!--
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:orientation="horizontal">
-        <View
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:background="@drawable/navigationbar_background">
+        <TextView
+            android:id="@+id/tv_recent_title"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:background="@color/tagLight"
-            android:layout_height="match_parent"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@color/tagDark"
-            android:layout_height="match_parent"/>
+            android:gravity="center_horizontal"
+            android:text="随便看看" />
     </LinearLayout>
-    -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/divider_horizontal_timeline" />
     <com.moxun.tagcloudlib.view.TagCloudView
         android:id="@+id/tag_cloud"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:autoScrollMode="uniform"
+        android:layout_gravity="center"
         app:lightColor="@color/tagLight"
         app:darkColor="@color/tagDark"
         app:radiusPercent="0.6"

@@ -3,7 +3,6 @@ package com.fxp.activities;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,13 +17,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.fxp.base.BaseAppCompatActivity;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.Comment;
 import com.fxp.manager.CommentManager;
 import com.fxp.util.PictureUtil;
 import com.moxun.tagcloud.R;
 
-public class CommentActivity extends Activity {
+public class CommentActivity extends BaseAppCompatActivity {
 	EditText etSendComment;
 	ListView lvComment;
 	Button btnSendComment;

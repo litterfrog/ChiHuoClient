@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:background="@drawable/navigationbar_background"
         android:orientation="horizontal" >
 
@@ -15,7 +16,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7dp"
             android:background="@null"
             android:onClick="onClick"
             android:text="取消" />
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7dp"
             android:background="@drawable/comment_btn_selector"
             android:enabled="false"
             android:onClick="onClick"
@@ -44,7 +45,6 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/ImageView09"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/divider_horizontal_timeline" />

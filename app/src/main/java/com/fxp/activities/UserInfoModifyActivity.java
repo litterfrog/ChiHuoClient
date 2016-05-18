@@ -1,10 +1,11 @@
 package com.fxp.activities;
 
-import com.example.handlerthreadtest.R;
+import com.fxp.base.BaseAppCompatActivity;
+import com.fxp.util.DialogUtil;
+import com.moxun.tagcloud.R;
 import com.fxp.entity.User;
 import com.fxp.manager.UserInfoManager;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class UserInfoModifyActivity extends Activity {
+public class UserInfoModifyActivity extends BaseAppCompatActivity {
 	private EditText et_userinfo_modify_name,
 				et_userinfo_modify_sex,
 				et_userinfo_modify_phone,
@@ -63,9 +64,18 @@ public class UserInfoModifyActivity extends Activity {
 				userInfoManager=new UserInfoManager(getContentResolver());
 			}
 			setEditTextStatusToUser();
-			userInfoManager.updateUserInfo(user);
+			boolean updateSuccess=userInfoManager.updateUserInfo(user);
+			if(!updateSuccess){
+				boolean insertSuccess=userInfoManager.setUsrInfo(user);
+				if(!insertSuccess){
+					DialogUtil.dialogWithOneButton(this,"更新信息失败");
+				}
+			}
+			finish();
 			break;
-
+			case R.id.btnCancelModifyUserInfo:
+				finish();
+				break;
 		default:
 			break;
 		}
@@ -90,6 +100,7 @@ public class UserInfoModifyActivity extends Activity {
 		if(!TextUtils.isEmpty(et_userinfo_modify_address.getText().toString().trim())){
 			user.setAddress(et_userinfo_modify_address.getText().toString().trim());
 		}
+		Log.i("test","setEditTextStatusToUser-"+user.toString());
 	}
 
 	private void findViews() {

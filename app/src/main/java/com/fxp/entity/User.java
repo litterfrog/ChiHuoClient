@@ -1,10 +1,16 @@
 package com.fxp.entity;
 
+import java.io.Serializable;
+
 import com.fxp.constants.ProviderConstant;
 
-public class User {
+public class User implements Serializable{
+	/**
+	 *
+	 */
 	public static final int ISMALE = ProviderConstant.ISMALE;
 	public static final int ISFEMALE = ProviderConstant.ISFEMALE;
+	private static final long serialVersionUID = 1L;
 	public static final int INVALID_VALUE=-1;
 	private int id=INVALID_VALUE;
 	private int accId=INVALID_VALUE;
@@ -57,6 +63,6 @@ public class User {
 				+ ", sex=" + sex + ", phone=" + phone + ", address=" + address
 				+ "]";
 	}
-	
-	
+
+
 }

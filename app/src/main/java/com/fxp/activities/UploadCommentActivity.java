@@ -27,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.fxp.base.BaseAppCompatActivity;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.Comment;
 import com.fxp.manager.CommentManager;
@@ -37,7 +38,7 @@ import com.fxp.util.SharedPreferenceUtil;
 import com.fxp.util.TimeUtil;
 import com.moxun.tagcloud.R;
 
-public class UploadCommentActivity extends Activity {
+public class UploadCommentActivity extends BaseAppCompatActivity {
 	public static final File PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera/");
 	public static Uri imageUri;	// 拍照后的图片路径
 	/** 用来请求照相功能的常量 */

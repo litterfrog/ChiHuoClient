@@ -27,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fxp.activities.UserInfoModifyActivity;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.User;
 import com.fxp.entity.UserAccount;
@@ -47,9 +49,9 @@ public class UserInfoFragment extends Fragment {
 	private ArrayList<UserInfoItem> userInfoList=new ArrayList<UserInfoItem>();
 	private ProfileOnClickListener clickListener=new ProfileOnClickListener();
 	private SharedPreferences prefs;
-	
 	private UserAccountManager userAccountManager;
-	
+	private User currentUser;
+	private UserInfoAdapter adapter;
 	private final String PREFS_NAME="chihuoACC";
 	private final String PREFS_ACCID="accId";
 	private final String PREFS_ACCEMAIL="accEmail";
@@ -79,6 +81,29 @@ public class UserInfoFragment extends Fragment {
 		userAccountManager=new UserAccountManager(contentResolver);
 		initFace();
 	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		int accId = prefs.getInt(PREFS_ACCID, 0);
+		if(0!=accId){
+			refreshUserInfoFace(accId);
+		}
+	}
+
+	private void refreshUserInfoFace(int accId) {
+		currentUser=new User();
+		currentUser.setAccId(accId);
+		selectUserInfo(currentUser);
+		tvFragProMyName.setText(currentUser.getName());
+		tvFragProMyFollowers_count.setText("");
+		tvFragProMyFriends_count.setText("");
+		tvFragProMyStatuses_count.setText("");
+		initUserInfoList(currentUser);
+		adapter.notifyDataSetChanged();
+	}
+
+
 	private void initFace() {
 		prefs = getActivity().getSharedPreferences(PREFS_NAME,
 				Context.MODE_PRIVATE);
@@ -99,10 +124,10 @@ public class UserInfoFragment extends Fragment {
 		ll_login_register_form.setVisibility(View.GONE);
 		ll_userinfo_form.setVisibility(View.VISIBLE);
 		
-		User user=new User();
-		user.setAccId(accId);
-		selectUserInfo(user);
-		setViews(user);		
+		currentUser=new User();
+		currentUser.setAccId(accId);
+		selectUserInfo(currentUser);
+		setViews(currentUser);
 	}
 
 	private void showLoginFace() {
@@ -170,7 +195,7 @@ public class UserInfoFragment extends Fragment {
 		tvFragProMyFriends_count.setText("");
 		tvFragProMyStatuses_count.setText("");
 		initUserInfoList(user);
-		UserInfoAdapter adapter=new UserInfoAdapter();
+		adapter=new UserInfoAdapter();
 		lvUserInfo.setAdapter(adapter);
 //		ImageLoader.display(user.profile_image_url, ivFragProMyHeade);
 	}
@@ -278,7 +303,7 @@ public class UserInfoFragment extends Fragment {
 					//启动设置activity
 					Intent intent=new Intent(getActivity(),UserInfoModifyActivity.class);
 					Bundle bundle = new Bundle();
-					bundle.putSerializable("user", user);
+					bundle.putSerializable("user", currentUser);
 					intent.putExtras(bundle);
 					startActivity(intent);
 				}else if("登录"==tv_switch_register.getText().toString().trim()){
