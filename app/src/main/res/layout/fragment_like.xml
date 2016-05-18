@@ -2,34 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/navigationbar_background" >
-
-        <EditText
-            android:id="@+id/tvFragHomeName"
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:hint="戳我找好吃的喽"
-            android:gravity="center"
-            android:textSize="15sp" />
-
+            android:gravity="center_horizontal"
+            android:text="我的最爱" />
     </LinearLayout>
-
-    <ImageView
-    android:id="@+id/ivFragHomeDivider1"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/divider_horizontal_timeline" />
-
     <com.markmao.pulltorefresh.widget.XListView
-        android:id="@+id/lv_home_xlistview"
+        android:id="@+id/lv_like_xlistview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="#00000000"/>
-
 </LinearLayout>

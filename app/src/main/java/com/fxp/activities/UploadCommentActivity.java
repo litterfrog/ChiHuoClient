@@ -34,7 +34,7 @@ import com.fxp.manager.CommentManager;
 import com.fxp.util.BitMapUtil;
 import com.fxp.util.DialogUtil;
 import com.fxp.util.PictureUtil;
-import com.fxp.util.SharedPreferenceUtil;
+import com.fxp.manager.SharedPreferenceManager;
 import com.fxp.util.TimeUtil;
 import com.moxun.tagcloud.R;
 
@@ -70,7 +70,7 @@ public class UploadCommentActivity extends BaseAppCompatActivity {
 		switch (v.getId()) {
 		case R.id.btnUploadWeiBo:
 
-			int accId=SharedPreferenceUtil.getInstance(this).getAccId();
+			int accId= SharedPreferenceManager.getInstance(this).getAccId();
 			if(0==accId){
 				//提示请登录
 				DialogUtil.dialogWithOneButton(this,"请先登录");

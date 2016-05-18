@@ -9,7 +9,6 @@ import java.util.Locale;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +25,6 @@ import android.widget.TextView;
 import com.fxp.activities.CommentActivity;
 import com.fxp.activities.LargeImageActivity;
 import com.fxp.activities.UploadCommentActivity;
-import com.fxp.constants.Constant;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.Food;
 import com.fxp.manager.FoodManager;
@@ -75,7 +73,7 @@ public class HomeFragment extends Fragment {
 
 	private void initListView(View view) {
 		mHandler = new Handler();
-		mListView = (XListView) view.findViewById(R.id.lv_xlistview);
+		mListView = (XListView) view.findViewById(R.id.lv_home_xlistview);
 		mListView.setPullRefreshEnable(true);
 		mListView.setPullLoadEnable(true);
 		mListView.setAutoLoadEnable(true);
