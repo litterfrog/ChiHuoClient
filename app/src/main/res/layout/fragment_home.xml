@@ -21,10 +21,10 @@
     </LinearLayout>
 
     <ImageView
-    android:id="@+id/ivFragHomeDivider1"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/divider_horizontal_timeline" />
+        android:id="@+id/ivFragHomeDivider1"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@drawable/divider_horizontal_timeline" />
 
     <com.markmao.pulltorefresh.widget.XListView
         android:id="@+id/lv_home_xlistview"

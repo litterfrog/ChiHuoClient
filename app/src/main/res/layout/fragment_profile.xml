@@ -31,6 +31,10 @@
             android:textSize="15sp"
             android:clickable="true" />
     </FrameLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/divider_horizontal_timeline" />
     <LinearLayout
         android:id="@+id/ll_login_register_form"
         android:layout_width="match_parent"
@@ -144,7 +148,7 @@
     <LinearLayout
         android:id="@+id/ll_userinfo_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -326,7 +330,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
+            android:layout_gravity="bottom"
             android:orientation="vertical" >
 
             <Button
@@ -337,7 +341,7 @@
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/loginoutbutton_bg_selector"
                 android:text="退出登录"
-                android:textColor="@android:color/holo_red_light"
+                android:textColor="#ffff4444"
                 android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>

@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -27,8 +28,11 @@ import com.fxp.activities.LargeImageActivity;
 import com.fxp.activities.UploadCommentActivity;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.Food;
+import com.fxp.main.MainActivity;
 import com.fxp.manager.FoodManager;
+import com.fxp.manager.SharedPreferenceManager;
 import com.fxp.myview.MyImageButton;
+import com.fxp.util.DialogUtil;
 import com.fxp.util.PictureUtil;
 import com.markmao.pulltorefresh.widget.XListView;
 import com.moxun.tagcloud.R;
@@ -42,6 +46,7 @@ public class HomeFragment extends Fragment {
 	FoodManager foodManager;
 	private int foodGroupCount=0;
 	Calendar calendar = Calendar.getInstance();
+	MainActivity mainActivity;
 	public static HomeFragment newInstance() {
 
 		Bundle args = new Bundle();
@@ -59,6 +64,7 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view,  Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		mainActivity=(MainActivity)getActivity();
 		PictureUtil.init(getActivity());
 		initFoodManager();
 		initFoodList();
@@ -305,34 +311,80 @@ public class HomeFragment extends Fragment {
 		public void onClick(View v) {
 			Intent intent=null;
 			switch (v.getId()) {
-			case R.id.mIBtn_comment:
-				Log.i("TEST", "onClick-mIBtn_comment");
-				intent = new Intent(getActivity()
-						.getApplicationContext(), CommentActivity.class);
-				if (foodId > 0) {
-					Bundle bundle = new Bundle();
-					bundle.putInt(ProviderConstant.TFOOD_ID, foodId);
-					intent.putExtras(bundle);
-				}
-				startActivity(intent);
-				break;
-			case R.id.mIBtn_respot:
-				Log.i("TEST", "onClick-mIBtn_respot");
-				haveVisitedPlusOne();
-				break;
-			case R.id.tvComment:
-				Log.i("TEST", "onClick-tvComment");
-				intent = new Intent(getActivity()
-						.getApplicationContext(), UploadCommentActivity.class);
-				if(foodId>0){
-					Bundle bundle = new Bundle();
-					bundle.putInt(ProviderConstant.TFOOD_ID, foodId);
-					intent.putExtras(bundle);
-				}
-				startActivity(intent);
-				break;
-			default:
-				break;
+				case R.id.mIBtn_comment:
+					Log.i("TEST", "onClick-mIBtn_comment");
+					intent = new Intent(getActivity()
+							.getApplicationContext(), CommentActivity.class);
+					if (foodId > 0) {
+						Bundle bundle = new Bundle();
+						bundle.putInt(ProviderConstant.TFOOD_ID, foodId);
+						intent.putExtras(bundle);
+					}
+					startActivity(intent);
+					break;
+				case R.id.mIBtn_respot:
+					Log.i("TEST", "onClick-mIBtn_respot");
+					if(!SharedPreferenceManager.getInstance(getActivity()).checkLoginStatus()) {
+						DialogUtil.dialogWithOneButton(getActivity(), "请先登录", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								if(null!=mainActivity){
+									mainActivity.getUiHandler().sendEmptyMessage(3);
+								}
+								dialog.dismiss();
+							}
+						});
+						break;
+					}
+					haveVisitedPlusOne();
+					break;
+				case R.id.mIBtn_like:
+					if(!SharedPreferenceManager.getInstance(getActivity()).checkLoginStatus()) {
+						DialogUtil.dialogWithOneButton(getActivity(), "请先登录", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								if(null!=mainActivity){
+									mainActivity.getUiHandler().sendEmptyMessage(3);
+								}
+								dialog.dismiss();
+							}
+						});
+						break;
+					}
+					likePlusOne();
+					break;
+				case R.id.tvComment:
+					Log.i("TEST", "onClick-tvComment");
+
+					if(!SharedPreferenceManager.getInstance(getActivity()).checkLoginStatus()) {
+						DialogUtil.dialogWithOneButton(getActivity(), "请先登录", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								if(null!=mainActivity){
+									mainActivity.getUiHandler().sendEmptyMessage(3);
+								}
+								dialog.dismiss();
+							}
+						});
+						break;
+					}
+					intent = new Intent(getActivity()
+							.getApplicationContext(), UploadCommentActivity.class);
+					if(foodId>0){
+						Bundle bundle = new Bundle();
+						bundle.putInt(ProviderConstant.TFOOD_ID, foodId);
+						intent.putExtras(bundle);
+					}
+					startActivity(intent);
+					break;
+				default:
+					break;
 			}
 		}
 
@@ -340,7 +392,9 @@ public class HomeFragment extends Fragment {
 			// TODO Auto-generated method stub
 			
 		}
-
+		private void likePlusOne() {
+			//TODO ADD LIKE
+		}
 		public int getFoodId() {
 			return foodId;
 		}
@@ -350,6 +404,7 @@ public class HomeFragment extends Fragment {
 		}
 
 	}
+
 	public class ImageOnClickListener implements OnClickListener {
 		private int position;
 		private int imgPosition;

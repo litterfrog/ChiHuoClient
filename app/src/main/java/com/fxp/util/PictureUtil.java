@@ -36,7 +36,7 @@ public class PictureUtil {
 	}
 	public static void saveCommentPicture(Bitmap bm,int commentId) {
 //		Log.e(TAG, "保存图片");
-		File commentBitmapFile = new File(Constant.COMMENT_FOLDER_NAME, Constant.PREFIX_COMMENT_PIC+"_"+commentId);
+		File commentBitmapFile = new File(getAbsolutPath(Constant.COMMENT_FOLDER_NAME), Constant.PREFIX_COMMENT_PIC+commentId);
 		if (commentBitmapFile.exists()) {
 			commentBitmapFile.delete();
 		}

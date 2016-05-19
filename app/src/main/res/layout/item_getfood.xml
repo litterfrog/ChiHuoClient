@@ -208,7 +208,7 @@
     <ImageView
         android:id="@+id/ImageView09"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1px"
         android:background="@drawable/divider_horizontal_timeline" />
 
     <LinearLayout
@@ -257,7 +257,7 @@
             android:src="@drawable/mini_vertical_line" />
 
         <com.fxp.myview.MyImageButton
-            android:id="@+id/myImageButton3"
+            android:id="@+id/mIBtn_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"

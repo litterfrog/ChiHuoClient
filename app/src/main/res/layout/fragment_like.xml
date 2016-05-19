@@ -15,6 +15,10 @@
             android:gravity="center_horizontal"
             android:text="我的最爱" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/divider_horizontal_timeline" />
     <com.markmao.pulltorefresh.widget.XListView
         android:id="@+id/lv_like_xlistview"
         android:layout_width="match_parent"

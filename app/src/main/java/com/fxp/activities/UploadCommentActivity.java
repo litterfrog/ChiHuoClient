@@ -80,8 +80,10 @@ public class UploadCommentActivity extends BaseAppCompatActivity {
 			commentManager.setComment(foodId, accId, etUpload.getText().toString(), currentTime);
 			if(BitMapUtil.bitmap==null){
 				//不带图片
+				Log.i("test","不带图片");
 			}else{
 				//带图片
+				Log.i("test","带图片");
 				ArrayList<Comment> commentFoodIdAccIdTime = commentManager.getCommentFoodIdAccIdTime(foodId, accId, currentTime);
 				if(null!=commentFoodIdAccIdTime&&1==commentFoodIdAccIdTime.size()){
 					PictureUtil.saveCommentPicture(BitMapUtil.bitmap,commentFoodIdAccIdTime.get(0).getId());

@@ -197,7 +197,6 @@ public class UserInfoFragment extends Fragment {
 		initUserInfoList(user);
 		adapter=new UserInfoAdapter();
 		lvUserInfo.setAdapter(adapter);
-//		ImageLoader.display(user.profile_image_url, ivFragProMyHeade);
 	}
 	private void initUserInfoList(User user){
 		userInfoList.clear();

@@ -70,12 +70,14 @@ public class VisitedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mainActivity=(MainActivity)getActivity();
         if(!SharedPreferenceManager.getInstance(getActivity()).checkLoginStatus()){
-            DialogUtil.dialogWithOneButton(getActivity(), "请先登录",new DialogInterface.OnClickListener() {
+            DialogUtil.dialogWithOneButton(getActivity(), "请先登录", new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // TODO Auto-generated method stub
-                    mainActivity.getUiHandler().sendEmptyMessage(3);
+                    if (null != mainActivity) {
+                        mainActivity.getUiHandler().sendEmptyMessage(3);
+                    }
                     dialog.dismiss();
                 }
             });
