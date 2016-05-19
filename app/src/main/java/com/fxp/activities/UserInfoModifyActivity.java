@@ -64,10 +64,14 @@ public class UserInfoModifyActivity extends BaseAppCompatActivity {
 				userInfoManager=new UserInfoManager(getContentResolver());
 			}
 			setEditTextStatusToUser();
-			boolean updateSuccess=userInfoManager.updateUserInfo(user);
-			if(!updateSuccess){
+			if(null==userInfoManager.getUserByAccId(user.getAccId())){
 				boolean insertSuccess=userInfoManager.setUsrInfo(user);
 				if(!insertSuccess){
+					DialogUtil.dialogWithOneButton(this,"写入信息失败");
+				}
+			}else{
+				boolean updateSuccess=userInfoManager.updateUserInfo(user);
+				if(!updateSuccess){
 					DialogUtil.dialogWithOneButton(this,"更新信息失败");
 				}
 			}

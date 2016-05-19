@@ -379,7 +379,7 @@ public class UserInfoFragment extends Fragment {
 							UserAccount userAccWithId = userAccountManager.getUserAccByEmail(userAccount.getEmail());
 							Toast.makeText(getActivity(), "注册成功，记得完善信息哦！", Toast.LENGTH_SHORT).show();
 							saveACCinfoToLocal(userAccWithId);
-							showUserInfoFace(-1);
+							showUserInfoFace(userAccWithId.getAccId());
 						}else{
 							dialog("注册失败");
 						}
