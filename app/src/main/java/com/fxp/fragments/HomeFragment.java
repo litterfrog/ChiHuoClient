@@ -23,14 +23,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.fxp.activities.CommentActivity;
 import com.fxp.activities.LargeImageActivity;
 import com.fxp.activities.UploadCommentActivity;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.Food;
+import com.fxp.entity.Visited;
 import com.fxp.main.MainActivity;
 import com.fxp.manager.FoodManager;
+import com.fxp.manager.LikeManager;
 import com.fxp.manager.SharedPreferenceManager;
+import com.fxp.manager.VisitedManager;
 import com.fxp.myview.MyImageButton;
 import com.fxp.util.DialogUtil;
 import com.fxp.util.PictureUtil;
@@ -44,6 +49,8 @@ public class HomeFragment extends Fragment {
 	ArrayList<ArrayList<String>> picList=new ArrayList<ArrayList<String>>();
 	FoodAdapter foodAdapter;
 	FoodManager foodManager;
+	LikeManager likeManager;
+	VisitedManager visitedManager;
 	private int foodGroupCount=0;
 	Calendar calendar = Calendar.getInstance();
 	MainActivity mainActivity;
@@ -73,6 +80,8 @@ public class HomeFragment extends Fragment {
 	}
 
 	private void initFoodManager() {
+		likeManager=new LikeManager(getActivity().getContentResolver());
+		visitedManager=new VisitedManager(getActivity().getContentResolver());
 		foodManager=new FoodManager(getActivity().getContentResolver());
 		foodManager.setGroupSize(5);
 	}
@@ -193,6 +202,7 @@ public class HomeFragment extends Fragment {
 					.get(position).getId());
 			holder.mIBtn_comment.setOnClickListener(holder.myOnClickListener);
 			holder.mIBtn_respot.setOnClickListener(holder.myOnClickListener);
+			holder.mIBtn_like.setOnClickListener(holder.myOnClickListener);
 			holder.tvComment.setOnClickListener(holder.myOnClickListener);
 			//点击图片放大
 			ImageOnClickListener imageOnClickListener = new ImageOnClickListener(position);
@@ -291,6 +301,9 @@ public class HomeFragment extends Fragment {
 					.findViewById(R.id.mIBtn_comment);
 			holder.mIBtn_respot = (MyImageButton) convertView
 			.findViewById(R.id.mIBtn_respot);
+			holder.mIBtn_like = (MyImageButton) convertView
+					.findViewById(R.id.mIBtn_like);
+
 		}
 
 	}
@@ -300,7 +313,7 @@ public class HomeFragment extends Fragment {
 		ImageView ivUser;
 		LinearLayout llNine, llChild1, llChild2, llChild3;
 		ArrayList<ImageView> nineList = new ArrayList<ImageView>();
-		MyImageButton mIBtn_comment,mIBtn_respot;
+		MyImageButton mIBtn_comment,mIBtn_respot,mIBtn_like;
 		MyOnClickListener myOnClickListener = new MyOnClickListener();
 	}
 
@@ -338,7 +351,7 @@ public class HomeFragment extends Fragment {
 						});
 						break;
 					}
-					haveVisitedPlusOne();
+					haveVisitedPlusOne(foodId);
 					break;
 				case R.id.mIBtn_like:
 					if(!SharedPreferenceManager.getInstance(getActivity()).checkLoginStatus()) {
@@ -388,12 +401,28 @@ public class HomeFragment extends Fragment {
 			}
 		}
 
-		private void haveVisitedPlusOne() {
+		private void haveVisitedPlusOne(int foodId) {
 			// TODO Auto-generated method stub
+			if(!visitedManager.isAlreadlyVisited(foodId,SharedPreferenceManager.getInstance(getActivity()).getAccId())){
+				boolean ret=visitedManager.insertVisited(foodId,SharedPreferenceManager.getInstance(getActivity()).getAccId());
+				if(ret){
+					Toast.makeText(getContext(),"已经加入足迹列表",Toast.LENGTH_SHORT).show();
+				}
+			}else {
+				Toast.makeText(getContext(),"在足迹中已经存在咯",Toast.LENGTH_SHORT).show();
+			}
 			
 		}
 		private void likePlusOne() {
 			//TODO ADD LIKE
+			if(!likeManager.isAlreadlyLike(foodId, SharedPreferenceManager.getInstance(getActivity()).getAccId())){
+				boolean ret=likeManager.insertLike(foodId, SharedPreferenceManager.getInstance(getActivity()).getAccId());
+				if(ret){
+					Toast.makeText(getContext(),"已经加入喜爱列表",Toast.LENGTH_SHORT).show();
+				}
+			}else {
+				Toast.makeText(getContext(),"在喜爱列表中已经存在咯",Toast.LENGTH_SHORT).show();
+			}
 		}
 		public int getFoodId() {
 			return foodId;
