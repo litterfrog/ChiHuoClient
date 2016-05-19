@@ -22,8 +22,9 @@ import com.fxp.activities.LargeImageActivity;
 import com.fxp.activities.UploadCommentActivity;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.Food;
+import com.fxp.entity.Like;
 import com.fxp.main.MainActivity;
-import com.fxp.manager.FoodManager;
+import com.fxp.manager.LikeManager;
 import com.fxp.manager.SharedPreferenceManager;
 import com.fxp.myview.MyImageButton;
 import com.fxp.util.DialogUtil;
@@ -44,10 +45,10 @@ public class LikeFragment extends Fragment {
     private MainActivity mainActivity;
     private XListView mListView;
     private Handler mHandler;
-    ArrayList<Food> foodList;
+    ArrayList<Like> likeList;
     ArrayList<ArrayList<String>> picList=new ArrayList<ArrayList<String>>();
     LikeAdapter likeAdapter;
-    FoodManager foodManager;
+    LikeManager likeManager;
     private int foodGroupCount=0;
     Calendar calendar = Calendar.getInstance();
     public static LikeFragment newInstance() {
@@ -91,8 +92,8 @@ public class LikeFragment extends Fragment {
     }
 
     private void initFoodManager() {
-        foodManager=new FoodManager(getActivity().getContentResolver());
-        foodManager.setGroupSize(5);
+        likeManager=new LikeManager(getActivity().getContentResolver());
+        likeManager.setGroupSize(5);
     }
 
     private void initListView(View view) {
@@ -114,13 +115,13 @@ public class LikeFragment extends Fragment {
         mListView.setRefreshTime(getTime());
     }
     private void initFoodList() {
-        foodList = foodManager.getFoodListFragment(0);
+        likeList = likeManager.getLikeListFragment(0);
         setPicListWithFoodList();
     }
     private void setPicListWithFoodList(){
         picList.clear();
-        for(Food f:foodList){
-            picList.add(PictureUtil.getCommonPicturePathList(f.getId()));
+        for(Like like:likeList){
+            picList.add(PictureUtil.getCommonPicturePathList(like.getFoodId()));
 
         }
     }
@@ -134,9 +135,9 @@ public class LikeFragment extends Fragment {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(foodList!=null){
+                    if(likeList!=null){
                         foodGroupCount=0;
-                        foodList = foodManager.getFoodListFragment(0);
+                        likeList = likeManager.getLikeListFragment(0);
                         setPicListWithFoodList();
                         likeAdapter.notifyDataSetChanged();
                     }
@@ -150,7 +151,7 @@ public class LikeFragment extends Fragment {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    foodList.addAll(foodManager.getFoodListFragment(++foodGroupCount));
+                    likeList.addAll(likeManager.getLikeListFragment(++foodGroupCount));
                     setPicListWithFoodList();
                     likeAdapter.notifyDataSetChanged();
                     onLoad();
@@ -167,12 +168,12 @@ public class LikeFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return foodList.size();
+            return likeList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return foodList.get(position);
+            return likeList.get(position);
         }
 
         @Override
@@ -206,9 +207,9 @@ public class LikeFragment extends Fragment {
 
         // 监听
         private void adapterSetListener(Holder holder, int position) {
-            // 传入当前微博的id
-            holder.myOnClickListener.setFoodId(foodList
-                    .get(position).getId());
+            // 传入当前food的id
+            holder.myOnClickListener.setFoodId(likeList
+                    .get(position).getFoodId());
             holder.mIBtn_comment.setOnClickListener(holder.myOnClickListener);
             holder.mIBtn_respot.setOnClickListener(holder.myOnClickListener);
             holder.tvComment.setOnClickListener(holder.myOnClickListener);
@@ -221,16 +222,16 @@ public class LikeFragment extends Fragment {
         }
 
         private void adapterSetViews(Holder holder, int position) {
-            holder.tvText.setText(foodList.get(position).getSummary());
-            Log.i("TEST", "source:" + foodList.get(position).getSummary());
+            holder.tvText.setText(likeList.get(position).getFood().getSummary());
+            Log.i("TEST", "source:" + likeList.get(position).getFood().getSummary());
             // 昵称
             holder.tvScreen_name
-                    .setText(foodList.get(position).getName());
+                    .setText(likeList.get(position).getFood().getName());
             // 头像
-            holder.ivUser.setImageBitmap(PictureUtil.getFoodHeadPicture(foodList.get(position).getId()));
+            holder.ivUser.setImageBitmap(PictureUtil.getFoodHeadPicture(likeList.get(position).getFoodId()));
 
             //address
-            holder.tvAddress.setText(foodList.get(position).getAddress());
+            holder.tvAddress.setText(likeList.get(position).getFood().getAddress());
             // 九宫格
             if (picList.get(position).size()==0) {
                 holder.llNine.setVisibility(View.GONE);
@@ -426,7 +427,6 @@ public class LikeFragment extends Fragment {
             intent.putExtra("imgPosition", imgPosition);
             intent.putExtra("picList", picList.get(position));
             Log.i("TEST", "position--"+position);
-            Log.i("TEST", "foodList==null"+(foodList.get(position).getPictruepath()==null));
             startActivity(intent);
 
         }

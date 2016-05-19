@@ -23,9 +23,11 @@ import com.fxp.activities.LargeImageActivity;
 import com.fxp.activities.UploadCommentActivity;
 import com.fxp.constants.ProviderConstant;
 import com.fxp.entity.Food;
+import com.fxp.entity.Visited;
 import com.fxp.main.MainActivity;
 import com.fxp.manager.FoodManager;
 import com.fxp.manager.SharedPreferenceManager;
+import com.fxp.manager.VisitedManager;
 import com.fxp.myview.MyImageButton;
 import com.fxp.util.DialogUtil;
 import com.fxp.util.PictureUtil;
@@ -45,10 +47,10 @@ public class VisitedFragment extends Fragment {
     private MainActivity mainActivity;
     private XListView mListView;
     private Handler mHandler;
-    ArrayList<Food> foodList;
+    ArrayList<Visited> visitedList;
     ArrayList<ArrayList<String>> picList=new ArrayList<ArrayList<String>>();
     VisitedAdapter visitedAdapter;
-    FoodManager foodManager;
+    VisitedManager visitedManager;
     private int foodGroupCount=0;
     Calendar calendar = Calendar.getInstance();
     public static VisitedFragment newInstance() {
@@ -92,8 +94,8 @@ public class VisitedFragment extends Fragment {
 
 
     private void initFoodManager() {
-        foodManager=new FoodManager(getActivity().getContentResolver());
-        foodManager.setGroupSize(5);
+        visitedManager=new VisitedManager(getActivity().getContentResolver());
+        visitedManager.setGroupSize(5);
     }
 
     private void initListView(View view) {
@@ -115,13 +117,13 @@ public class VisitedFragment extends Fragment {
         mListView.setRefreshTime(getTime());
     }
     private void initFoodList() {
-        foodList = foodManager.getFoodListFragment(0);
+        visitedList = visitedManager.getVisitedListFragment(0);
         setPicListWithFoodList();
     }
     private void setPicListWithFoodList(){
         picList.clear();
-        for(Food f:foodList){
-            picList.add(PictureUtil.getCommonPicturePathList(f.getId()));
+        for(Visited visited:visitedList){
+            picList.add(PictureUtil.getCommonPicturePathList(visited.getFoodId()));
 
         }
     }
@@ -135,9 +137,9 @@ public class VisitedFragment extends Fragment {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(foodList!=null){
+                    if(visitedList!=null){
                         foodGroupCount=0;
-                        foodList = foodManager.getFoodListFragment(0);
+                        visitedList = visitedManager.getVisitedListFragment(0);
                         setPicListWithFoodList();
                         visitedAdapter.notifyDataSetChanged();
                     }
@@ -151,7 +153,7 @@ public class VisitedFragment extends Fragment {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    foodList.addAll(foodManager.getFoodListFragment(++foodGroupCount));
+                    visitedList.addAll(visitedManager.getVisitedListFragment(++foodGroupCount));
                     setPicListWithFoodList();
                     visitedAdapter.notifyDataSetChanged();
                     onLoad();
@@ -168,12 +170,12 @@ public class VisitedFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return foodList.size();
+            return visitedList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return foodList.get(position);
+            return visitedList.get(position);
         }
 
         @Override
@@ -208,8 +210,8 @@ public class VisitedFragment extends Fragment {
         // 监听
         private void adapterSetListener(Holder holder, int position) {
             // 传入当前微博的id
-            holder.myOnClickListener.setFoodId(foodList
-                    .get(position).getId());
+            holder.myOnClickListener.setFoodId(visitedList
+                    .get(position).getFoodId());
             holder.mIBtn_comment.setOnClickListener(holder.myOnClickListener);
             holder.mIBtn_respot.setOnClickListener(holder.myOnClickListener);
             holder.tvComment.setOnClickListener(holder.myOnClickListener);
@@ -222,16 +224,16 @@ public class VisitedFragment extends Fragment {
         }
 
         private void adapterSetViews(Holder holder, int position) {
-            holder.tvText.setText(foodList.get(position).getSummary());
-            Log.i("TEST", "source:" + foodList.get(position).getSummary());
+            holder.tvText.setText(visitedList.get(position).getFood().getSummary());
+            Log.i("TEST", "source:" + visitedList.get(position).getFood().getSummary());
             // 昵称
             holder.tvScreen_name
-                    .setText(foodList.get(position).getName());
+                    .setText(visitedList.get(position).getFood().getName());
             // 头像
-            holder.ivUser.setImageBitmap(PictureUtil.getFoodHeadPicture(foodList.get(position).getId()));
+            holder.ivUser.setImageBitmap(PictureUtil.getFoodHeadPicture(visitedList.get(position).getFoodId()));
 
             //address
-            holder.tvAddress.setText(foodList.get(position).getAddress());
+            holder.tvAddress.setText(visitedList.get(position).getFood().getAddress());
             // 九宫格
             if (picList.get(position).size()==0) {
                 holder.llNine.setVisibility(View.GONE);
@@ -427,7 +429,7 @@ public class VisitedFragment extends Fragment {
             intent.putExtra("imgPosition", imgPosition);
             intent.putExtra("picList", picList.get(position));
             Log.i("TEST", "position--"+position);
-            Log.i("TEST", "foodList==null"+(foodList.get(position).getPictruepath()==null));
+            Log.i("TEST", "visitedList==null"+(visitedList.get(position).getFood().getPictruepath()==null));
             startActivity(intent);
 
         }
