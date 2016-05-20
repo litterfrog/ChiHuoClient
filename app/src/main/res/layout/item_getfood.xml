@@ -211,7 +211,7 @@
         android:layout_height="1px"
         android:background="@drawable/divider_horizontal_timeline" />
 
-    <LinearLayout
+    <com.fxp.myview.RevealLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -269,6 +269,6 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp" >
         </com.fxp.myview.MyImageButton>
-    </LinearLayout>
+    </com.fxp.myview.RevealLayout>
 
 </LinearLayout>

@@ -42,7 +42,7 @@ public class VisitedManager {
     public boolean deleteVisited(int foodId,int accId){
         int ret=contentResolver.delete(
                 ProviderConstant.VISITED_URI,
-                ProviderConstant.TVISITED_ACCID+"="+accId+" AND "+ProviderConstant.TVISITED_FOODID+"="+foodId,
+                ProviderConstant.TVISITED_ACCID + "=" + accId + " AND " + ProviderConstant.TVISITED_FOODID + "=" + foodId,
                 null
         );
         if(ret<=0){
@@ -57,7 +57,7 @@ public class VisitedManager {
         Cursor cursor = contentResolver.query(
                 ProviderConstant.VISITED_URI,
                 visitedColums,
-                ProviderConstant.TVISITED_ACCID+"="+accId+" AND "+ProviderConstant.TVISITED_FOODID+"="+foodId,
+                ProviderConstant.TVISITED_ACCID + "=" + accId + " AND " + ProviderConstant.TVISITED_FOODID + "=" + foodId,
                 null,
                 null);
         if(null==cursor){
@@ -82,6 +82,17 @@ public class VisitedManager {
                 ProviderConstant.VISITED_URI,
                 visitedColums,
                 null,
+                null,
+                ProviderConstant.TVISITED_ID + " asc limit " + (groupcount * groupSize) + "," + groupSize);
+
+
+        return getVisitedFromCursor(cursor);
+    }
+    public ArrayList<Visited> getVisitedListFragmentByAccId(int groupcount,int accId){
+        Cursor cursor = contentResolver.query(
+                ProviderConstant.VISITED_URI,
+                visitedColums,
+                ProviderConstant.TVISITED_ACCID+"="+accId,
                 null,
                 ProviderConstant.TVISITED_ID + " asc limit " + (groupcount * groupSize) + "," + groupSize);
 

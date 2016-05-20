@@ -42,7 +42,7 @@ public class LikeManager {
     public boolean deleteLike(int foodId,int accId){
         int ret=contentResolver.delete(
                 ProviderConstant.LIKE_URI,
-                ProviderConstant.TLIKE_ACCID+"="+accId+" AND "+ProviderConstant.TLIKE_FOODID+"="+foodId,
+                ProviderConstant.TLIKE_ACCID + "=" + accId + " AND " + ProviderConstant.TLIKE_FOODID + "=" + foodId,
                 null
         );
         if(ret<=0){
@@ -54,7 +54,7 @@ public class LikeManager {
         Cursor cursor = contentResolver.query(
                 ProviderConstant.LIKE_URI,
                 likeColums,
-                ProviderConstant.TLIKE_ACCID+"="+accId+" AND "+ProviderConstant.TLIKE_FOODID+"="+foodId,
+                ProviderConstant.TLIKE_ACCID + "=" + accId + " AND " + ProviderConstant.TLIKE_FOODID + "=" + foodId,
                 null,
                 null);
         if(null==cursor){
@@ -79,6 +79,17 @@ public class LikeManager {
                 ProviderConstant.LIKE_URI,
                 likeColums,
                 null,
+                null,
+                ProviderConstant.TLIKE_ID + " asc limit " + (groupcount * groupSize) + "," + groupSize);
+
+
+        return getLikeFromCursor(cursor);
+    }
+    public ArrayList<Like> getLikeListFragmentByAccId(int groupcount,int accId){
+        Cursor cursor = contentResolver.query(
+                ProviderConstant.LIKE_URI,
+                likeColums,
+                ProviderConstant.TLIKE_ACCID+"="+accId,
                 null,
                 ProviderConstant.TLIKE_ID + " asc limit " + (groupcount * groupSize) + "," + groupSize);
 

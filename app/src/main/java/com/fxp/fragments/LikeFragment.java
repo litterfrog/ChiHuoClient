@@ -115,7 +115,7 @@ public class LikeFragment extends Fragment {
         mListView.setRefreshTime(getTime());
     }
     private void initFoodList() {
-        likeList = likeManager.getLikeListFragment(0);
+        likeList = likeManager.getLikeListFragmentByAccId(0, SharedPreferenceManager.getInstance(getActivity()).getAccId());
         setPicListWithFoodList();
     }
     private void setPicListWithFoodList(){
@@ -137,7 +137,7 @@ public class LikeFragment extends Fragment {
                 public void run() {
                     if(likeList!=null){
                         foodGroupCount=0;
-                        likeList = likeManager.getLikeListFragment(0);
+                        likeList = likeManager.getLikeListFragmentByAccId(0, SharedPreferenceManager.getInstance(getActivity()).getAccId());
                         setPicListWithFoodList();
                         likeAdapter.notifyDataSetChanged();
                     }
@@ -151,7 +151,7 @@ public class LikeFragment extends Fragment {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    likeList.addAll(likeManager.getLikeListFragment(++foodGroupCount));
+                    likeList.addAll(likeManager.getLikeListFragmentByAccId(++foodGroupCount, SharedPreferenceManager.getInstance(getActivity()).getAccId()));
                     setPicListWithFoodList();
                     likeAdapter.notifyDataSetChanged();
                     onLoad();

@@ -406,10 +406,10 @@ public class HomeFragment extends Fragment {
 			if(!visitedManager.isAlreadlyVisited(foodId,SharedPreferenceManager.getInstance(getActivity()).getAccId())){
 				boolean ret=visitedManager.insertVisited(foodId,SharedPreferenceManager.getInstance(getActivity()).getAccId());
 				if(ret){
-					Toast.makeText(getContext(),"已经加入足迹列表",Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity().getApplicationContext(),"已经加入足迹列表",Toast.LENGTH_SHORT).show();
 				}
 			}else {
-				Toast.makeText(getContext(),"在足迹中已经存在咯",Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity().getApplicationContext(),"在足迹中已经存在咯",Toast.LENGTH_SHORT).show();
 			}
 			
 		}
@@ -418,10 +418,10 @@ public class HomeFragment extends Fragment {
 			if(!likeManager.isAlreadlyLike(foodId, SharedPreferenceManager.getInstance(getActivity()).getAccId())){
 				boolean ret=likeManager.insertLike(foodId, SharedPreferenceManager.getInstance(getActivity()).getAccId());
 				if(ret){
-					Toast.makeText(getContext(),"已经加入喜爱列表",Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity().getApplicationContext(),"已经加入喜爱列表",Toast.LENGTH_SHORT).show();
 				}
 			}else {
-				Toast.makeText(getContext(),"在喜爱列表中已经存在咯",Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity().getApplicationContext(),"在喜爱列表中已经存在咯",Toast.LENGTH_SHORT).show();
 			}
 		}
 		public int getFoodId() {

@@ -117,7 +117,7 @@ public class VisitedFragment extends Fragment {
         mListView.setRefreshTime(getTime());
     }
     private void initFoodList() {
-        visitedList = visitedManager.getVisitedListFragment(0);
+        visitedList = visitedManager.getVisitedListFragmentByAccId(0, SharedPreferenceManager.getInstance(getActivity()).getAccId());
         setPicListWithFoodList();
     }
     private void setPicListWithFoodList(){
@@ -139,7 +139,7 @@ public class VisitedFragment extends Fragment {
                 public void run() {
                     if(visitedList!=null){
                         foodGroupCount=0;
-                        visitedList = visitedManager.getVisitedListFragment(0);
+                        visitedList = visitedManager.getVisitedListFragmentByAccId(0, SharedPreferenceManager.getInstance(getActivity()).getAccId());
                         setPicListWithFoodList();
                         visitedAdapter.notifyDataSetChanged();
                     }
@@ -153,7 +153,7 @@ public class VisitedFragment extends Fragment {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    visitedList.addAll(visitedManager.getVisitedListFragment(++foodGroupCount));
+                    visitedList.addAll(visitedManager.getVisitedListFragmentByAccId(++foodGroupCount, SharedPreferenceManager.getInstance(getActivity()).getAccId()));
                     setPicListWithFoodList();
                     visitedAdapter.notifyDataSetChanged();
                     onLoad();
