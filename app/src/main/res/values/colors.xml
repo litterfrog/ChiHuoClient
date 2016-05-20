@@ -5,5 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="tagLight">#b1c914</color>
     <color name="tagDark">#206fa1</color>
+    <color name="reveal_color">#1b000000</color>
 
 </resources>

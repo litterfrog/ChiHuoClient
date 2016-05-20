@@ -229,6 +229,9 @@ public class VisitedFragment extends Fragment {
             // 昵称
             holder.tvScreen_name
                     .setText(visitedList.get(position).getFood().getName());
+            //phone
+            holder.tv_getfood_phone
+                    .setText(visitedList.get(position).getFood().getPhone());
             // 头像
             holder.ivUser.setImageBitmap(PictureUtil.getFoodHeadPicture(visitedList.get(position).getFoodId()));
 
@@ -278,6 +281,8 @@ public class VisitedFragment extends Fragment {
                     .findViewById(R.id.tvAddress);
             holder.tvScreen_name = (TextView) convertView
                     .findViewById(R.id.tvScreen_name);
+            holder.tv_getfood_phone = (TextView) convertView
+                    .findViewById(R.id.tv_getfood_phone);
             holder.tvComment = (TextView) convertView
                     .findViewById(R.id.tvComment);
             holder.ivUser = (ImageView) convertView.findViewById(R.id.ivUser);
@@ -317,7 +322,7 @@ public class VisitedFragment extends Fragment {
     }
 
     public class Holder {
-        TextView tvText, tvSource, tvAddress, tvScreen_name,tvComment;
+        TextView tvText, tvSource, tvAddress, tvScreen_name,tvComment,tv_getfood_phone;
         ImageView ivUser;
         LinearLayout llNine, llChild1, llChild2, llChild3;
         ArrayList<ImageView> nineList = new ArrayList<ImageView>();
