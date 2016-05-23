@@ -6,5 +6,5 @@
     <color name="tagLight">#b1c914</color>
     <color name="tagDark">#206fa1</color>
     <color name="reveal_color">#1b000000</color>
-
+    <color name="theme_primary">#2196F3</color>
 </resources>

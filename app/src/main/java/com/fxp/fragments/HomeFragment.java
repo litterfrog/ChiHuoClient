@@ -14,12 +14,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Fragment;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +39,7 @@ import com.fxp.manager.LikeManager;
 import com.fxp.manager.SharedPreferenceManager;
 import com.fxp.manager.VisitedManager;
 import com.fxp.myview.MyImageButton;
+import com.fxp.searchview.MaterialSearchView;
 import com.fxp.util.DialogUtil;
 import com.fxp.util.PictureUtil;
 import com.markmao.pulltorefresh.widget.XListView;
@@ -54,6 +57,11 @@ public class HomeFragment extends Fragment {
 	private int foodGroupCount=0;
 	Calendar calendar = Calendar.getInstance();
 	MainActivity mainActivity;
+	private boolean searchByLabel=false;
+	private String foodLabel;
+	private MaterialSearchView searchView;
+	TextView btn_search;
+
 	public static HomeFragment newInstance() {
 
 		Bundle args = new Bundle();
@@ -65,12 +73,14 @@ public class HomeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			 ViewGroup container,  Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_home, container, false);
+		return inflater.inflate(R.layout.container_home, container, false);
 	}
 
 	@Override
 	public void onViewCreated(View view,  Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		initView(view);
+		setListener(view);
 		mainActivity=(MainActivity)getActivity();
 		PictureUtil.init(getActivity());
 		initFoodManager();
@@ -79,11 +89,61 @@ public class HomeFragment extends Fragment {
 
 	}
 
+	private void setListener(final View view) {
+		btn_search.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				searchView.showSearch();
+			}
+		});
+
+		searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				foodLabel=query;
+				searchByLabel=true;
+				foodList = foodManager.getFoodListFragmentByLabel(0,query);
+				setPicListWithFoodList();
+				foodAdapter.notifyDataSetChanged();
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				//Do some magic
+				return false;
+			}
+		});
+
+		searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+			@Override
+			public void onSearchViewShown() {
+				//Do some magic
+			}
+
+			@Override
+			public void onSearchViewClosed() {
+				//Do some magic
+			}
+		});
+	}
+
+	private void initView(View view) {
+		btn_search=(TextView)view.findViewById(R.id.tv_search_home);
+
+		searchView = (MaterialSearchView) view.findViewById(R.id.search_view);
+		searchView.setVoiceSearch(false);
+		searchView.setCursorDrawable(R.drawable.custom_cursor);
+		searchView.setEllipsize(true);
+		searchView.setSuggestions(getResources().getStringArray(R.array.query_suggestions));
+	}
+
 	private void initFoodManager() {
 		likeManager=new LikeManager(getActivity().getContentResolver());
 		visitedManager=new VisitedManager(getActivity().getContentResolver());
 		foodManager=new FoodManager(getActivity().getContentResolver());
 		foodManager.setGroupSize(5);
+		searchByLabel=false;
 	}
 
 	private void initListView(View view) {
@@ -127,6 +187,7 @@ public class HomeFragment extends Fragment {
 				public void run() {
 					if(foodList!=null){
 						foodGroupCount=0;
+						searchByLabel=false;
 						foodList = foodManager.getFoodListFragment(0);
 						setPicListWithFoodList();
 						foodAdapter.notifyDataSetChanged();
@@ -141,7 +202,12 @@ public class HomeFragment extends Fragment {
 			mHandler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-					foodList.addAll(foodManager.getFoodListFragment(++foodGroupCount));
+					if(searchByLabel){
+						foodList.addAll(foodManager.getFoodListFragmentByLabel(++foodGroupCount,foodLabel));
+					}else {
+						foodList.addAll(foodManager.getFoodListFragment(++foodGroupCount));
+					}
+
 					setPicListWithFoodList();
 					foodAdapter.notifyDataSetChanged();
 					onLoad();

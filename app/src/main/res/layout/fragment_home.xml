@@ -4,22 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/navigationbar_background" >
-
-        <EditText
-            android:id="@+id/tvFragHomeName"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="戳我找好吃的喽"
-            android:gravity="center"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/ivFragHomeDivider1"
         android:layout_width="fill_parent"
