@@ -61,7 +61,6 @@ public class HomeFragment extends Fragment {
 	private String foodLabel;
 	private MaterialSearchView searchView;
 	TextView btn_search;
-
 	public static HomeFragment newInstance() {
 
 		Bundle args = new Bundle();
@@ -79,9 +78,10 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view,  Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		mainActivity=(MainActivity)getActivity();
 		initView(view);
 		setListener(view);
-		mainActivity=(MainActivity)getActivity();
+
 		PictureUtil.init(getActivity());
 		initFoodManager();
 		initFoodList();
@@ -100,9 +100,9 @@ public class HomeFragment extends Fragment {
 		searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				foodLabel=query;
-				searchByLabel=true;
-				foodList = foodManager.getFoodListFragmentByLabel(0,query);
+				foodLabel = query;
+				searchByLabel = true;
+				foodList = foodManager.getFoodListFragmentByLabel(0, query);
 				setPicListWithFoodList();
 				foodAdapter.notifyDataSetChanged();
 				return false;
@@ -165,7 +165,13 @@ public class HomeFragment extends Fragment {
 		mListView.setRefreshTime(getTime());
 	}
 	private void initFoodList() {
-		foodList = foodManager.getFoodListFragment(0);
+		if(mainActivity!=null&&mainActivity.getTag()!=null){
+			foodList=foodManager.getFoodListFragmentByLabel(0,mainActivity.getTag());
+			mainActivity.clearTag();
+		}else{
+			foodList = foodManager.getFoodListFragment(0);
+		}
+
 		setPicListWithFoodList();
 	}
 	private void setPicListWithFoodList(){

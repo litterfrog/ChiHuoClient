@@ -19,7 +19,14 @@ import java.util.List;
  * Created by moxun on 16/1/19.
  */
 public class TextTagsAdapter extends TagsAdapter {
+    public interface OnTextClickListener{
+        void onTextClick(int position);
 
+    }
+    private OnTextClickListener onTextClickListener;
+    public void setOnTextClickListener(OnTextClickListener onTextClickListener){
+        this.onTextClickListener=onTextClickListener;
+    }
     private List<String> dataSet = new ArrayList<>();
 
     public TextTagsAdapter(@NonNull String... data) {
@@ -41,7 +48,10 @@ public class TextTagsAdapter extends TagsAdapter {
             @Override
             public void onClick(View v) {
                 Log.e("Click", "Tag " + position + " clicked.");
-                Toast.makeText(context, "Tag " + position + " clicked", Toast.LENGTH_SHORT).show();
+                if(onTextClickListener!=null){
+                    onTextClickListener.onTextClick(position);
+                }
+//                Toast.makeText(context, "Tag " + position + " clicked", Toast.LENGTH_SHORT).show();
             }
         });
         return tv;
@@ -61,4 +71,5 @@ public class TextTagsAdapter extends TagsAdapter {
     public void onThemeColorChanged(View view, int themeColor) {
         ((TextView) view).setTextColor(themeColor);
     }
+
 }

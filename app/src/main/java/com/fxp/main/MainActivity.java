@@ -22,6 +22,19 @@ import java.lang.ref.WeakReference;
 public class MainActivity extends BaseAppCompatActivity {
     private BottomBar mBottomBar;
     private UIHandler uiHandler;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+    public void clearTag(){
+        this.tag =null;
+    }
+
+    private String tag=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +90,7 @@ public class MainActivity extends BaseAppCompatActivity {
                     this.activity.get().mBottomBar.selectTabAtPosition(1,true);
                     break;
                 case 2:
+                    this.activity.get().setTag(msg.getData().getString("tag"));
                     this.activity.get().mBottomBar.selectTabAtPosition(2,true);
                     break;
                 case 3:
