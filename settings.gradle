@@ -1,2 +1,1 @@
-include ':app', ':tagcloudlib', ':bottom-bar', ':PullToRefresh'
-
+include ':PullToRefresh', ':app', ':bottom-bar', ':tagcloudlib'

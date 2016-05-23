@@ -21,6 +21,8 @@ android {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
 }
 def siteUrl = 'https://github.com/misakuo/3dTagCloudAndroid'      // 项目的主页
 def gitUrl = 'https://github.com/misakuo/3dTagCloudAndroid.git'   // Git仓库的url
