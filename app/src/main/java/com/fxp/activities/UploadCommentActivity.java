@@ -88,6 +88,7 @@ public class UploadCommentActivity extends BaseAppCompatActivity {
 				if(null!=commentFoodIdAccIdTime&&1==commentFoodIdAccIdTime.size()){
 					PictureUtil.saveCommentPicture(BitMapUtil.bitmap,commentFoodIdAccIdTime.get(0).getId());
 				}
+				BitMapUtil.bitmap=null;
 			}
 
 			finish();
